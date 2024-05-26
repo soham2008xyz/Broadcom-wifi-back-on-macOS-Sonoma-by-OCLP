@@ -6,23 +6,23 @@
 
 ---
 
-### February 2024: macOS Sonoma 14.4. beta breaks OCLP patch
+### Note: macOS Sonoma 14.4 breaks OCLP patch
 
 In the beta versions of macOS 14.4, Apple has modified parts of the Wi-Fi stack and OCLP root patch has stopped working so the Fenvi and Broadcom Wi-Fi are no longer operational.
 
 To recover these Wi-Fi, 2 changes are required:
 
-- OLCP 1.4.0 which is not yet an official version, for now you can grab it from OCLP GitHub in the Actions tab >> in the list of workflows choose the most recent one with the text `CI - Build wxPython` >> [Link](https://github.com/dortania/OpenCore-Legacy-Patcher/actions)
+- OLCP 1.4.2 >> [Link](https://github.com/dortania/OpenCore-Legacy-Patcher/releases)
 - replace `IOSkywalkFamily.kext`, current version is 1.0.0 and you have to change to version 1.1.0, also available on the OLCP GitHub >> payloads >> Kexts >> Wifi >> [Link](https://github.com/dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Wifi)
 
 How to make the change?
 
 1. replace `IOSkywalkFamily.kext`, revert OCLP root patch and reboot
-2. apply root patch of **OCLP 1.4.0 nightly build** and reboot.
+2. apply root patch of OCLP 1.4.2 and reboot.
    
 The other settings do not change.
 
-**Note**: Keep in mind that macOS 14.4 is still a beta version and that this may have more changes in subsequent versions until the final one. But at least for now, in beta 3, this OCLP tweak works and allows the Fenvi / Broadcom to become operational again.
+**Note**: Keep in mind that this may have more changes in subsequent macOS versions. But at least for now this OCLP tweak works.
 
 ---
 
@@ -119,3 +119,11 @@ Note: current AMFIPass.kext 1.4.0 doesn't need anymore `amfi=0x80` boot arg on S
 I use AMFIPass.kext, removing `amfi=0x80`. If OCLP root patching fails due to this setting, you can temporarily disable AMFI with the boot argument `amfi=0x80`, apply the patches, reboot, remove `amfi=0x80`, and reboot again.
 
 (credits to [5T33Z0](https://github.com/5T33Z0) for much of the explanatory text about AMFI and AMFIPass.kext).
+
+---
+
+**Note**: there’s a semi-automated patch available, thanks to AppleOSX, aplicable only when installing from USB, tried with success -> [link](https://github.com/AppleOSX/PatchSonomaWiFiOnTheFly).
+
+---
+
+(Clic [here](https://perez987.github.io/Broadcom-wifi-back-on-macOS-Sonoma-by-OCLP/) to see this repo as GitHub pages)
